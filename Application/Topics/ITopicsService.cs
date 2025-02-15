@@ -1,10 +1,12 @@
-﻿namespace Application.Topics;
+﻿using Application.Dtos;
+
+namespace Application.Topics;
 
 public interface ITopicsService
 {
-    Task<List<Topic>> GetTopicsAsync();
-    Task<Topic> GetTopicAsync(Guid id);
-    Task<Topic> CreateTopicAsync(Topic topicRequestDto);
-    Task<Topic> UpdateTopicAsync(Guid id, Topic topicRequestDto);
+    Task<List<ResponseTopicDto>> GetTopicsAsync();
+    Task<ResponseTopicDto> GetTopicAsync(Guid id);
+    Task<ResponseTopicDto> CreateTopicAsync(CreateTopicDto requestTopicDto);
+    Task<ResponseTopicDto> UpdateTopicAsync(Guid id, UpdateTopicDto requestTopicDto);
     Task DeleteTopicAsync(Guid id);
 }
