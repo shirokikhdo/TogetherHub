@@ -1,9 +1,12 @@
-﻿namespace Api;
+﻿using Api.Exceptions.Handler;
+
+namespace Api;
 
 public static class DependencyInjection
 {
     public static IServiceCollection AddApiServices(this IServiceCollection services)
     {
+        services.AddExceptionHandler<CustomExceptionHandler>();
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
@@ -18,6 +21,7 @@ public static class DependencyInjection
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+        app.UseExceptionHandler(options => {});
         app.UseHttpsRedirection();
         app.UseAuthorization();
         app.MapControllers();
