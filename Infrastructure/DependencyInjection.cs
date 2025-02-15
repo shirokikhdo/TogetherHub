@@ -1,4 +1,5 @@
-﻿using Infrastructure.Data.DataBaseContext;
+﻿using Application.Data.DataBaseContext;
+using Infrastructure.Data.DataBaseContext;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +12,8 @@ public static class DependencyInjection
         var connectionString = configuration.GetConnectionString("SqLiteConnection");
         services.AddDbContext<ApplicationDbContext>(
             options => options.UseSqlite(connectionString));
+
+        services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
         return services;
     }
