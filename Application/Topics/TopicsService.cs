@@ -1,6 +1,8 @@
 ﻿using Application.Data.DataBaseContext;
 using Application.Dtos;
+using Application.Exceptions;
 using Application.Extensions;
+using Domain.ValueObjects;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Topics;
@@ -27,9 +29,15 @@ public class TopicsService : ITopicsService
         return topics.ToResponseTopicDtoList();
     }
 
-    public Task<ResponseTopicDto> GetTopicAsync(Guid id)
+    public async Task<ResponseTopicDto> GetTopicAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var topicId = TopicId.Of(id);
+        var topic = await _dbContext.Topics.FindAsync([topicId]);
+
+        if (topic is null)
+            throw new TopicNotFoundException(id);
+
+        return topic.ToResponseTopicDto();
     }
 
     public Task<ResponseTopicDto> CreateTopicAsync(CreateTopicDto requestTopicDto)
