@@ -1,5 +1,4 @@
 ﻿using Application.Data.DataBaseContext;
-using Domain.ValueObjects;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Topics;
@@ -32,12 +31,12 @@ public class TopicsService : ITopicsService
         throw new NotImplementedException();
     }
 
-    public Task<Topic> UpdateTopicAsync(TopicId id, Topic topicRequestDto)
+    public Task<Topic> UpdateTopicAsync(Guid id, Topic topicRequestDto)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteTopicAsync(TopicId id)
+    public Task DeleteTopicAsync(Guid id)
     {
         throw new NotImplementedException();
     }
