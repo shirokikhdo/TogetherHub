@@ -1,4 +1,5 @@
 using Infrastructure.Data.DataBaseContext;
+using Infrastructure.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    await app.InitializeDatabaseAsync();
 }
 
 app.UseHttpsRedirection();
