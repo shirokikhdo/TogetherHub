@@ -30,11 +30,13 @@ public class TopicsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<ResponseTopicDto>> CreateTopic(
+    public async Task<IResult> CreateTopic(
         [FromBody] CreateTopicDto createTopicDto,
         CancellationToken cancellationToken)
     {
-        return Ok();
+        var command = new CreateTopicCommand(createTopicDto);
+        var result = await _mediator.Send(command, cancellationToken);
+        return Results.Created($"/topics/{result.Topic.Id}", result.Topic);
     }
 
     [HttpPut("{id:guid}")]
