@@ -1,4 +1,5 @@
 ﻿using Api.Exceptions.Handler;
+using Api.Security.Extensions;
 
 namespace Api;
 
@@ -22,6 +23,7 @@ public static class DependencyInjection
         services.AddMediatR(cfg => 
             cfg.RegisterServicesFromAssembly(typeof(GetTopicsHandler).Assembly));
         services.AddAutoMapper(typeof(MappingProfile).Assembly);
+        services.AddIdentityServices();
 
         return services;
     }
