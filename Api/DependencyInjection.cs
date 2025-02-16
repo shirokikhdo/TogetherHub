@@ -10,12 +10,22 @@ public static class DependencyInjection
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+        services.AddCors(options =>
+        {
+            options.AddPolicy("together-hub-policy", policy =>
+            {
+                policy.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithOrigins("http://localhost:3000");
+            });
+        });
 
         return services;
     }
 
     public static WebApplication UseApiServices(this WebApplication app)
     {
+        app.UseCors("together-hub-policy");
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
