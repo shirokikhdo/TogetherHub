@@ -34,7 +34,7 @@ public class TopicsController : ControllerBase
         [FromBody] CreateTopicDto createTopicDto,
         CancellationToken cancellationToken)
     {
-        var command = new CreateTopicCommand(createTopicDto);
+        var command = new CreateTopicCommand(createTopicDto, cancellationToken);
         var result = await _mediator.Send(command, cancellationToken);
         return Results.Created($"/topics/{result.Topic.Id}", result.Topic);
     }
