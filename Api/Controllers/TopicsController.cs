@@ -40,12 +40,14 @@ public class TopicsController : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<ActionResult<ResponseTopicDto>> UpdateTopic(
+    public async Task<IResult> UpdateTopic(
         Guid id,
         [FromBody] UpdateTopicDto updateTopicDto,
         CancellationToken cancellationToken)
     {
-        return Ok();
+        var command = new UpdateTopicCommand(id, updateTopicDto, cancellationToken);
+        var result = await _mediator.Send(command, cancellationToken);
+        return Results.Ok(result);
     }
 
     [HttpDelete("{id:guid}")]

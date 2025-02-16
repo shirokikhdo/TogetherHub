@@ -32,4 +32,32 @@ public class Topic : Entity<TopicId>
         
         return topic;
     }
+
+    public void Update(
+        string title, 
+        string summary, 
+        string topicType,
+        DateTime eventStart,
+        string city,
+        string street)
+    {
+        if (!string.IsNullOrEmpty(title))
+            Title = title;
+
+        if (!string.IsNullOrEmpty(summary))
+            Summary = summary;
+
+        if (!string.IsNullOrEmpty(topicType))
+            TopicType = topicType;
+
+        Location = Location.Of(
+            string.IsNullOrEmpty(city)
+            ? Location.City
+            : city,
+            string.IsNullOrEmpty(street)
+                ? Location.Street
+                : street);
+
+        EventStart = eventStart;
+    }
 }
