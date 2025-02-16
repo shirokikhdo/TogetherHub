@@ -1,6 +1,4 @@
-﻿using Application.Data.DataBaseContext;
-
-namespace Application.Topics.Deprecated;
+﻿namespace Application.Topics.Deprecated;
 
 [Obsolete("Данный сервис устарел", true)]
 public class TopicsService : ITopicsService
