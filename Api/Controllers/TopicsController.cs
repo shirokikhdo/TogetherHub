@@ -49,10 +49,12 @@ public class TopicsController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> DeleteTopic(
+    public async Task<IResult> DeleteTopic(
         Guid id,
         CancellationToken cancellationToken)
     {
-        return Ok();
+        var command = new DeleteTopicCommand(id, cancellationToken);
+        var result = await _mediator.Send(command, cancellationToken);
+        return Results.Ok(result);
     }
 }
