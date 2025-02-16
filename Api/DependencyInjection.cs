@@ -21,6 +21,7 @@ public static class DependencyInjection
         });
         services.AddMediatR(cfg => 
             cfg.RegisterServicesFromAssembly(typeof(GetTopicsHandler).Assembly));
+        services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
         return services;
     }

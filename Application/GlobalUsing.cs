@@ -6,3 +6,4 @@ global using Domain.ValueObjects;
 global using Microsoft.EntityFrameworkCore;
 global using Application.Data.DataBaseContext;
 global using Shared.CQRS;
+global using AutoMapper;
