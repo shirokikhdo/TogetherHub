@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Topics.Queries.GetTopics;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
@@ -6,10 +8,19 @@ namespace Api.Controllers;
 [ApiController]
 public class TopicsController : ControllerBase
 {
+    private readonly IMediator _mediator;
+
+    public TopicsController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
     [HttpGet]
     public async Task<ActionResult<List<ResponseTopicDto>>> GetTopics(CancellationToken cancellationToken)
     {
-        return Ok();
+        var query = new GetTopicsQuery(cancellationToken);
+        var result =  await _mediator.Send(query, cancellationToken);
+        return Ok(result);
     }
 
     [HttpGet("{id:guid}")]

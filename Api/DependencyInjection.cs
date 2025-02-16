@@ -1,4 +1,5 @@
 ﻿using Api.Exceptions.Handler;
+using Application.Topics.Queries.GetTopics;
 
 namespace Api;
 
@@ -19,6 +20,8 @@ public static class DependencyInjection
                     .WithOrigins("http://localhost:3000");
             });
         });
+        services.AddMediatR(cfg => 
+            cfg.RegisterServicesFromAssembly(typeof(GetTopicsHandler).Assembly));
 
         return services;
     }
