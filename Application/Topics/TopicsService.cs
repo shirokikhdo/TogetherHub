@@ -4,7 +4,6 @@ using Application.Exceptions;
 using Application.Extensions;
 using Domain.ValueObjects;
 using Microsoft.Extensions.Logging;
-using System.Threading;
 
 namespace Application.Topics;
 
@@ -25,6 +24,7 @@ public class TopicsService : ITopicsService
     {
         var topics = await _dbContext.Topics
             .AsNoTracking()
+            .Where(x=>!x.IsDeleted)
             .ToListAsync(cancellationToken);
 
         return topics.ToResponseTopicDtoList();
@@ -37,7 +37,7 @@ public class TopicsService : ITopicsService
         var topicId = TopicId.Of(id);
         var topic = await _dbContext.Topics.FindAsync([topicId], cancellationToken);
 
-        if (topic is null)
+        if (topic is null || topic.IsDeleted)
             throw new TopicNotFoundException(id);
 
         return topic.ToResponseTopicDto();
@@ -65,7 +65,7 @@ public class TopicsService : ITopicsService
         var topicId = TopicId.Of(id);
         var topic = await _dbContext.Topics.FindAsync([topicId], cancellationToken);
 
-        if (topic is null)
+        if (topic is null || topic.IsDeleted)
             throw new TopicNotFoundException(id);
 
         if(!string.IsNullOrEmpty(requestTopicDto.Title))
@@ -93,10 +93,13 @@ public class TopicsService : ITopicsService
         var topicId = TopicId.Of(id);
         var topic = await _dbContext.Topics.FindAsync([topicId], cancellationToken);
 
-        if (topic is null)
+        if (topic is null || topic.IsDeleted)
             throw new TopicNotFoundException(id);
 
-        _dbContext.Topics.Remove(topic);
+        //_dbContext.Topics.Remove(topic);
+        topic.IsDeleted = true;
+        topic.DeletedAt = DateTime.UtcNow;
+
         await _dbContext.SaveChangesAsync(cancellationToken);
     }
 }
