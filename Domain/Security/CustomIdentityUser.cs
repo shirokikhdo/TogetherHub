@@ -4,6 +4,6 @@ namespace Domain.Security;
 
 public class CustomIdentityUser : IdentityUser
 {
-    public string Fullname { get; set; } = default!;
+    public string FullName { get; set; } = default!;
     public string About { get; set; } = default!;
 }
