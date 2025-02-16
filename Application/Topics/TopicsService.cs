@@ -1,23 +1,14 @@
 ﻿using Application.Data.DataBaseContext;
-using Application.Dtos;
-using Application.Exceptions;
-using Application.Extensions;
-using Domain.ValueObjects;
-using Microsoft.Extensions.Logging;
 
 namespace Application.Topics;
 
 public class TopicsService : ITopicsService
 {
     private readonly IApplicationDbContext _dbContext;
-    private readonly ILogger<TopicsService> _logger;
 
-    public TopicsService(
-        IApplicationDbContext dbContext,
-        ILogger<TopicsService> logger)
+    public TopicsService(IApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
-        _logger = logger;
     }
 
     public async Task<List<ResponseTopicDto>> GetTopicsAsync(CancellationToken cancellationToken)

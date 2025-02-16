@@ -1,6 +1,4 @@
-﻿using Application.Dtos;
-
-namespace Application.Topics;
+﻿namespace Application.Topics;
 
 public interface ITopicsService
 {
