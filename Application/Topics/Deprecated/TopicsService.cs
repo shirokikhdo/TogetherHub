@@ -1,7 +1,8 @@
 ﻿using Application.Data.DataBaseContext;
 
-namespace Application.Topics;
+namespace Application.Topics.Deprecated;
 
+[Obsolete("Данный сервис устарел", true)]
 public class TopicsService : ITopicsService
 {
     private readonly IApplicationDbContext _dbContext;
@@ -15,14 +16,14 @@ public class TopicsService : ITopicsService
     {
         var topics = await _dbContext.Topics
             .AsNoTracking()
-            .Where(x=>!x.IsDeleted)
+            .Where(x => !x.IsDeleted)
             .ToListAsync(cancellationToken);
 
         return topics.ToResponseTopicDtoList();
     }
 
     public async Task<ResponseTopicDto> GetTopicAsync(
-        Guid id, 
+        Guid id,
         CancellationToken cancellationToken)
     {
         var topicId = TopicId.Of(id);
@@ -49,8 +50,8 @@ public class TopicsService : ITopicsService
     }
 
     public async Task<ResponseTopicDto> UpdateTopicAsync(
-        Guid id, 
-        UpdateTopicDto requestTopicDto, 
+        Guid id,
+        UpdateTopicDto requestTopicDto,
         CancellationToken cancellationToken)
     {
         var topicId = TopicId.Of(id);
@@ -59,17 +60,17 @@ public class TopicsService : ITopicsService
         if (topic is null || topic.IsDeleted)
             throw new TopicNotFoundException(id);
 
-        if(!string.IsNullOrEmpty(requestTopicDto.Title))
+        if (!string.IsNullOrEmpty(requestTopicDto.Title))
             topic.Title = requestTopicDto.Title;
-        
-        if(!string.IsNullOrEmpty(requestTopicDto.Summary))
+
+        if (!string.IsNullOrEmpty(requestTopicDto.Summary))
             topic.Summary = requestTopicDto.Summary;
 
-        if(!string.IsNullOrEmpty(requestTopicDto.TopicType))
+        if (!string.IsNullOrEmpty(requestTopicDto.TopicType))
             topic.TopicType = requestTopicDto.TopicType;
 
         topic.Location = Location.Of(
-            requestTopicDto.Location.City, 
+            requestTopicDto.Location.City,
             requestTopicDto.Location.Street);
 
         topic.EventStart = requestTopicDto.EventStart;

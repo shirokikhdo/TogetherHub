@@ -1,5 +1,6 @@
-﻿namespace Application.Topics;
+﻿namespace Application.Topics.Deprecated;
 
+[Obsolete("Данный сервис устарел", true)]
 public interface ITopicsService
 {
     Task<List<ResponseTopicDto>> GetTopicsAsync(CancellationToken cancellationToken);

@@ -6,25 +6,16 @@ namespace Api.Controllers;
 [ApiController]
 public class TopicsController : ControllerBase
 {
-    private readonly ITopicsService _topicsService;
-
-    public TopicsController(ITopicsService topicsService)
-    {
-        _topicsService = topicsService;
-    }
-
     [HttpGet]
     public async Task<ActionResult<List<ResponseTopicDto>>> GetTopics(CancellationToken cancellationToken)
     {
-        var topics = await _topicsService.GetTopicsAsync(cancellationToken);
-        return Ok(topics);
+        return Ok();
     }
 
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<ResponseTopicDto>> GetTopic(Guid id, CancellationToken cancellationToken)
     {
-        var topic = await _topicsService.GetTopicAsync(id, cancellationToken);
-        return Ok(topic);
+        return Ok();
     }
 
     [HttpPost]
@@ -32,8 +23,7 @@ public class TopicsController : ControllerBase
         [FromBody] CreateTopicDto createTopicDto,
         CancellationToken cancellationToken)
     {
-        var topic = await _topicsService.CreateTopicAsync(createTopicDto, cancellationToken);
-        return Ok(topic);
+        return Ok();
     }
 
     [HttpPut("{id:guid}")]
@@ -42,8 +32,7 @@ public class TopicsController : ControllerBase
         [FromBody] UpdateTopicDto updateTopicDto,
         CancellationToken cancellationToken)
     {
-        var topic = await _topicsService.UpdateTopicAsync(id, updateTopicDto, cancellationToken);
-        return Ok(topic);
+        return Ok();
     }
 
     [HttpDelete("{id:guid}")]
@@ -51,7 +40,6 @@ public class TopicsController : ControllerBase
         Guid id,
         CancellationToken cancellationToken)
     {
-        await _topicsService.DeleteTopicAsync(id, cancellationToken);
         return Ok();
     }
 }
