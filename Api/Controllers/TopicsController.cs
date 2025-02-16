@@ -16,16 +16,16 @@ public class TopicsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<ResponseTopicDto>>> GetTopics()
+    public async Task<ActionResult<List<ResponseTopicDto>>> GetTopics(CancellationToken cancellationToken)
     {
-        var topics = await _topicsService.GetTopicsAsync();
+        var topics = await _topicsService.GetTopicsAsync(cancellationToken);
         return Ok(topics);
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult<ResponseTopicDto>> GetTopic(Guid id)
+    public async Task<ActionResult<ResponseTopicDto>> GetTopic(Guid id, CancellationToken cancellationToken)
     {
-        var topic = await _topicsService.GetTopicAsync(id);
+        var topic = await _topicsService.GetTopicAsync(id, cancellationToken);
         return Ok(topic);
     }
 
@@ -35,6 +35,16 @@ public class TopicsController : ControllerBase
         CancellationToken cancellationToken)
     {
         var topic = await _topicsService.CreateTopicAsync(createTopicDto, cancellationToken);
+        return Ok(topic);
+    }
+
+    [HttpPut("{id:guid}")]
+    public async Task<ActionResult<ResponseTopicDto>> UpdateTopic(
+        Guid id,
+        [FromBody] UpdateTopicDto updateTopicDto,
+        CancellationToken cancellationToken)
+    {
+        var topic = await _topicsService.UpdateTopicAsync(id, updateTopicDto, cancellationToken);
         return Ok(topic);
     }
 }
