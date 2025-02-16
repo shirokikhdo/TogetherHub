@@ -1,6 +1,5 @@
 ﻿using Application.Dtos;
 using Application.Topics;
-using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -24,9 +23,18 @@ public class TopicsController : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult<List<ResponseTopicDto>>> GetTopic(Guid id)
+    public async Task<ActionResult<ResponseTopicDto>> GetTopic(Guid id)
     {
         var topic = await _topicsService.GetTopicAsync(id);
+        return Ok(topic);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<ResponseTopicDto>> CreateTopic(
+        [FromBody] CreateTopicDto createTopicDto,
+        CancellationToken cancellationToken)
+    {
+        var topic = await _topicsService.CreateTopicAsync(createTopicDto, cancellationToken);
         return Ok(topic);
     }
 }

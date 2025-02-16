@@ -6,7 +6,7 @@ public interface ITopicsService
 {
     Task<List<ResponseTopicDto>> GetTopicsAsync();
     Task<ResponseTopicDto> GetTopicAsync(Guid id);
-    Task<ResponseTopicDto> CreateTopicAsync(CreateTopicDto requestTopicDto);
+    Task<ResponseTopicDto> CreateTopicAsync(CreateTopicDto requestTopicDto, CancellationToken cancellationToken);
     Task<ResponseTopicDto> UpdateTopicAsync(Guid id, UpdateTopicDto requestTopicDto);
     Task DeleteTopicAsync(Guid id);
 }

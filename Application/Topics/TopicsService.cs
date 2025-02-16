@@ -40,9 +40,18 @@ public class TopicsService : ITopicsService
         return topic.ToResponseTopicDto();
     }
 
-    public Task<ResponseTopicDto> CreateTopicAsync(CreateTopicDto requestTopicDto)
+    public async Task<ResponseTopicDto> CreateTopicAsync(
+        CreateTopicDto requestTopicDto,
+        CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var id = Guid.NewGuid();
+        var topicId = TopicId.Of(id);
+        var topic = requestTopicDto.ToTopic(topicId);
+
+        await _dbContext.Topics.AddAsync(topic, cancellationToken);
+        await _dbContext.SaveChangesAsync(cancellationToken);
+
+        return topic.ToResponseTopicDto();
     }
 
     public Task<ResponseTopicDto> UpdateTopicAsync(Guid id, UpdateTopicDto requestTopicDto)
