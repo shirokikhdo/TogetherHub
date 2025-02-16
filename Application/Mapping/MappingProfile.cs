@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-namespace Application.Mapping;
+﻿namespace Application.Mapping;
 
 public class MappingProfile : Profile
 {
@@ -21,5 +19,22 @@ public class MappingProfile : Profile
                     source.Location.Street)))
             .ForMember(dest => dest.Id,
                 options => options.MapFrom((source, dest) => dest.Id));
+
+        CreateMap<CreateTopicDto, Topic>()
+            .ForMember(dest => dest.Title,
+                options => options.MapFrom(source => source.Title))
+            .ForMember(dest => dest.Summary,
+                options => options.MapFrom(source => source.Summary))
+            .ForMember(dest => dest.TopicType,
+                options => options.MapFrom(source => source.TopicType))
+            .ForMember(dest => dest.EventStart,
+                options => options.MapFrom(source => source.EventStart))
+            .ForMember(dest => dest.Location,
+                options => options.MapFrom(source => Location.Of(
+                    source.Location.City,
+                    source.Location.Street)))
+            .ForMember(dest => dest.Id,
+                options => options.MapFrom(_ => TopicId.Of(Guid.NewGuid())));
+
     }
 }
