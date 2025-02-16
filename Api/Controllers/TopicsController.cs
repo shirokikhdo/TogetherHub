@@ -14,11 +14,11 @@ public class TopicsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<ResponseTopicDto>>> GetTopics(CancellationToken cancellationToken)
+    public async Task<IResult> GetTopics(CancellationToken cancellationToken)
     {
         var query = new GetTopicsQuery(cancellationToken);
         var result =  await _mediator.Send(query, cancellationToken);
-        return Ok(result);
+        return Results.Ok(result);
     }
 
     [HttpGet("{id:guid}")]
