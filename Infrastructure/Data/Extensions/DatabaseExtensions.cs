@@ -28,7 +28,7 @@ public static class DatabaseExtensions
         UserManager<CustomIdentityUser> userManager)
     {
         await SeedTopicsAsync(dbContext);
-        await SeedUsersAsync(dbContext, userManager);
+        await SeedUsersAsync(userManager);
     }
 
     private static async Task SeedTopicsAsync(ApplicationDbContext dbContext)
@@ -40,9 +40,7 @@ public static class DatabaseExtensions
         }
     }
 
-    private static async Task SeedUsersAsync(
-        ApplicationDbContext dbContext,
-        UserManager<CustomIdentityUser> userManager)
+    private static async Task SeedUsersAsync(UserManager<CustomIdentityUser> userManager)
     {
         if (!await userManager.Users.AnyAsync())
         {
