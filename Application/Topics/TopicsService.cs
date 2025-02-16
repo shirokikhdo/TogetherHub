@@ -4,6 +4,7 @@ using Application.Exceptions;
 using Application.Extensions;
 using Domain.ValueObjects;
 using Microsoft.Extensions.Logging;
+using System.Threading;
 
 namespace Application.Topics;
 
@@ -87,8 +88,15 @@ public class TopicsService : ITopicsService
         return topic.ToResponseTopicDto();
     }
 
-    public Task DeleteTopicAsync(Guid id)
+    public async Task DeleteTopicAsync(Guid id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var topicId = TopicId.Of(id);
+        var topic = await _dbContext.Topics.FindAsync([topicId], cancellationToken);
+
+        if (topic is null)
+            throw new TopicNotFoundException(id);
+
+        _dbContext.Topics.Remove(topic);
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 }

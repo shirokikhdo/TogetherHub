@@ -47,4 +47,13 @@ public class TopicsController : ControllerBase
         var topic = await _topicsService.UpdateTopicAsync(id, updateTopicDto, cancellationToken);
         return Ok(topic);
     }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> DeleteTopic(
+        Guid id,
+        CancellationToken cancellationToken)
+    {
+        await _topicsService.DeleteTopicAsync(id, cancellationToken);
+        return Ok();
+    }
 }
