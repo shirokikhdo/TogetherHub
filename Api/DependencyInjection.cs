@@ -1,5 +1,7 @@
 ﻿using Api.Exceptions.Handler;
 using Api.Security.Extensions;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace Api;
 
@@ -10,7 +12,13 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         services.AddExceptionHandler<CustomExceptionHandler>();
-        services.AddControllers();
+        services.AddControllers(options =>
+        {
+            var policy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build();
+            options.Filters.Add(new AuthorizeFilter(policy));
+        });
         services.AddEndpointsApiExplorer();
         services.AddSwagger();
         services.AddCors(options =>
