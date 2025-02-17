@@ -5,12 +5,14 @@ namespace Api;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApiServices(this IServiceCollection services)
+    public static IServiceCollection AddApiServices(
+        this IServiceCollection services, 
+        IConfiguration configuration)
     {
         services.AddExceptionHandler<CustomExceptionHandler>();
         services.AddControllers();
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        services.AddSwagger();
         services.AddCors(options =>
         {
             options.AddPolicy("together-hub-policy", policy =>
@@ -23,7 +25,7 @@ public static class DependencyInjection
         services.AddMediatR(cfg => 
             cfg.RegisterServicesFromAssembly(typeof(GetTopicsHandler).Assembly));
         services.AddAutoMapper(typeof(MappingProfile).Assembly);
-        services.AddIdentityServices();
+        services.AddIdentityServices(configuration);
 
         return services;
     }
@@ -38,6 +40,7 @@ public static class DependencyInjection
         }
         app.UseExceptionHandler(options => {});
         app.UseHttpsRedirection();
+        app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
 

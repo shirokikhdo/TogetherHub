@@ -29,15 +29,15 @@ public class JwtSecurityService : IJwtSecurityService
 
         var bytes = Encoding.UTF8.GetBytes(secretKey);
         var key = new SymmetricSecurityKey(bytes);
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
         var tokenHandler = new JsonWebTokenHandler();
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            SigningCredentials = creds,
+            SigningCredentials = credentials,
             Subject = new ClaimsIdentity(claims),
             IssuedAt = DateTime.UtcNow,
             NotBefore = DateTime.UtcNow.AddMinutes(0),
-            Expires = DateTime.UtcNow.AddMinutes(1)
+            Expires = DateTime.UtcNow.AddMinutes(10)
         };
 
         var token = tokenHandler.CreateToken(tokenDescriptor);
