@@ -1,4 +1,5 @@
 ﻿using Api.Exceptions.Handler;
+using Api.Middleware;
 using Api.Security.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -41,6 +42,7 @@ public static class DependencyInjection
     public static WebApplication UseApiServices(this WebApplication app)
     {
         app.UseCors("together-hub-policy");
+        app.UseMiddleware<ValidationMiddleware>();
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
