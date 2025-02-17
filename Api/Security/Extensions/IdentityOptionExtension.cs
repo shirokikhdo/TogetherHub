@@ -1,4 +1,5 @@
-﻿using Domain.Security;
+﻿using Api.Security.Services;
+using Domain.Security;
 using Infrastructure.Data.DataBaseContext;
 
 namespace Api.Security.Extensions;
@@ -17,6 +18,8 @@ public static class IdentityOptionExtension
         }).AddEntityFrameworkStores<ApplicationDbContext>();
         
         services.AddAuthentication();
+
+        services.AddScoped<IJwtSecurityService, JwtSecurityService>();
 
         return services;
     }

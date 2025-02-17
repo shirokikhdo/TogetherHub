@@ -1,4 +1,5 @@
-﻿using Domain.Security;
+﻿using Api.Security.Services;
+using Domain.Security;
 using Domain.Security.Dtos;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,14 @@ namespace Api.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly UserManager<CustomIdentityUser> _userManager;
+    private readonly IJwtSecurityService _jwtSecurityService;
 
-    public AuthController(UserManager<CustomIdentityUser> userManager)
+    public AuthController(
+        UserManager<CustomIdentityUser> userManager, 
+        IJwtSecurityService jwtSecurityService)
     {
         _userManager = userManager;
+        _jwtSecurityService = jwtSecurityService;
     }
 
     [HttpPost("login")]
@@ -27,11 +32,12 @@ public class AuthController : ControllerBase
         var result = await _userManager.CheckPasswordAsync(user, dto.Password);
         if (!result) 
             return Results.Unauthorized();
-        
+
+        var token = _jwtSecurityService.CreateToken(user);
         var response = new ResponseIdentityUserDto(
             user.UserName!, 
             user.Email!, 
-            "jwt-token");
+            token);
 
         return Results.Ok(response);
     }
