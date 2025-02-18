@@ -1,4 +1,5 @@
-﻿using Application.Security.Services;
+﻿using Application.Security.Commands.LoginUser;
+using Application.Security.Services;
 
 namespace Api.Controllers;
 
@@ -9,34 +10,27 @@ public class AuthController : ControllerBase
 {
     private readonly UserManager<CustomIdentityUser> _userManager;
     private readonly IJwtSecurityService _jwtSecurityService;
+    private readonly IMediator _mediator;
 
     public AuthController(
         UserManager<CustomIdentityUser> userManager, 
-        IJwtSecurityService jwtSecurityService)
+        IJwtSecurityService jwtSecurityService,
+        IMediator mediator)
     {
         _userManager = userManager;
         _jwtSecurityService = jwtSecurityService;
+        _mediator = mediator;
     }
 
     [HttpPost("login")]
     public async Task<IResult> Login(
-        [FromBody] LoginIdentityUserDto dto)
+        [FromBody] LoginIdentityUserDto dto,
+        CancellationToken cancellationToken)
     {
-        var user = await _userManager.FindByEmailAsync(dto.Email);
-        if (user is null)
-            return Results.Unauthorized();
+        var command = new LoginUserCommand(dto, cancellationToken);
+        var result = await _mediator.Send(command, cancellationToken);
 
-        var result = await _userManager.CheckPasswordAsync(user, dto.Password);
-        if (!result) 
-            return Results.Unauthorized();
-
-        var token = _jwtSecurityService.CreateToken(user);
-        var response = new ResponseIdentityUserDto(
-            user.UserName!, 
-            user.Email!, 
-            token);
-
-        return Results.Ok(response);
+        return Results.Ok(result);
     }
 
     [HttpPost("register")]

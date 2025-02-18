@@ -1,9 +1,41 @@
-﻿namespace Application.Security.Commands.LoginUser;
+﻿using Application.Security.Services;
+using Domain.Security;
+using Domain.Security.Dtos;
+using Microsoft.AspNetCore.Identity;
+
+namespace Application.Security.Commands.LoginUser;
 
 public class LoginUserHandler : ICommandHandler<LoginUserCommand, LoginUserResult>
 {
-    public Task<LoginUserResult> Handle(LoginUserCommand request, CancellationToken cancellationToken)
+    private readonly UserManager<CustomIdentityUser> _userManager;
+    private readonly IJwtSecurityService _jwtSecurityService;
+
+    public LoginUserHandler(
+        UserManager<CustomIdentityUser> userManager,
+        IJwtSecurityService jwtSecurityService)
     {
-        throw new NotImplementedException();
+        _userManager = userManager;
+        _jwtSecurityService = jwtSecurityService;
+    }
+
+    public async Task<LoginUserResult> Handle(LoginUserCommand request, CancellationToken cancellationToken)
+    {
+        var dto = request.LoginIdentityUserDto;
+
+        var user = await _userManager.FindByEmailAsync(dto.Email);
+        if (user is null)
+            return null;
+
+        var result = await _userManager.CheckPasswordAsync(user, dto.Password);
+        if (!result)
+            return null;
+
+        var token = _jwtSecurityService.CreateToken(user);
+        var response = new ResponseIdentityUserDto(
+            user.UserName!,
+            user.Email!,
+            token);
+
+        return new LoginUserResult(response);
     }
 }
