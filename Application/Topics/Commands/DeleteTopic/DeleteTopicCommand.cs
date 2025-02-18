@@ -1,4 +1,4 @@
 ﻿namespace Application.Topics.Commands.DeleteTopic;
 
-public record DeleteTopicCommand(Guid Id, CancellationToken CancellationToken) 
+public record DeleteTopicCommand(Guid Id) 
     : ICommand<DeleteTopicResult>;

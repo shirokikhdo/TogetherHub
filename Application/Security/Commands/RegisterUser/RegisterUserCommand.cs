@@ -1,4 +1,4 @@
 ﻿namespace Application.Security.Commands.RegisterUser;
 
-public record RegisterUserCommand(RegisterIdentityUserDto RegisterIdentityUserDto, CancellationToken CancellationToken) 
+public record RegisterUserCommand(RegisterIdentityUserDto RegisterIdentityUserDto) 
     : ICommand<RegisterUserResult>;

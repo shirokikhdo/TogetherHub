@@ -1,4 +1,4 @@
 ﻿namespace Application.Topics.Queries.GetTopic;
 
-public record GetTopicQuery(Guid Id, CancellationToken CancellationToken)
+public record GetTopicQuery(Guid Id)
     : IQuery<GetTopicResult>;

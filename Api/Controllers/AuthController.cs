@@ -17,7 +17,7 @@ public class AuthController : ControllerBase
         [FromBody] LoginIdentityUserDto dto,
         CancellationToken cancellationToken)
     {
-        var command = new LoginUserCommand(dto, cancellationToken);
+        var command = new LoginUserCommand(dto);
         var result = await _mediator.Send(command, cancellationToken);
 
         return Results.Ok(result);
@@ -28,7 +28,7 @@ public class AuthController : ControllerBase
         [FromBody] RegisterIdentityUserDto dto,
         CancellationToken cancellationToken)
     {
-        var command = new RegisterUserCommand(dto, cancellationToken);
+        var command = new RegisterUserCommand(dto);
         var result = await _mediator.Send(command, cancellationToken);
 
         return Results.Ok(result);

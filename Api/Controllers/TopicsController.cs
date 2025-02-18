@@ -14,7 +14,7 @@ public class TopicsController : ControllerBase
     [HttpGet]
     public async Task<IResult> GetTopics(CancellationToken cancellationToken)
     {
-        var query = new GetTopicsQuery(cancellationToken);
+        var query = new GetTopicsQuery();
         var result =  await _mediator.Send(query, cancellationToken);
         return Results.Ok(result);
     }
@@ -22,7 +22,7 @@ public class TopicsController : ControllerBase
     [HttpGet("{id:guid}")]
     public async Task<IResult> GetTopic(Guid id, CancellationToken cancellationToken)
     {
-        var query = new GetTopicQuery(id, cancellationToken);
+        var query = new GetTopicQuery(id);
         var result = await _mediator.Send(query, cancellationToken);
         return Results.Ok(result);
     }
@@ -32,7 +32,7 @@ public class TopicsController : ControllerBase
         [FromBody] CreateTopicDto createTopicDto,
         CancellationToken cancellationToken)
     {
-        var command = new CreateTopicCommand(createTopicDto, cancellationToken);
+        var command = new CreateTopicCommand(createTopicDto);
         var result = await _mediator.Send(command, cancellationToken);
         return Results.Created($"/topics/{result.Topic.Id}", result.Topic);
     }
@@ -43,7 +43,7 @@ public class TopicsController : ControllerBase
         [FromBody] UpdateTopicDto updateTopicDto,
         CancellationToken cancellationToken)
     {
-        var command = new UpdateTopicCommand(id, updateTopicDto, cancellationToken);
+        var command = new UpdateTopicCommand(id, updateTopicDto);
         var result = await _mediator.Send(command, cancellationToken);
         return Results.Ok(result);
     }
@@ -53,7 +53,7 @@ public class TopicsController : ControllerBase
         Guid id,
         CancellationToken cancellationToken)
     {
-        var command = new DeleteTopicCommand(id, cancellationToken);
+        var command = new DeleteTopicCommand(id);
         var result = await _mediator.Send(command, cancellationToken);
         return Results.Ok(result);
     }

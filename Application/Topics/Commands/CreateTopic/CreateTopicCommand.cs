@@ -1,4 +1,4 @@
 ﻿namespace Application.Topics.Commands.CreateTopic;
 
-public record CreateTopicCommand(CreateTopicDto RequestTopicDto, CancellationToken CancellationToken) 
+public record CreateTopicCommand(CreateTopicDto RequestTopicDto) 
     : ICommand<CreateTopicResult>;
