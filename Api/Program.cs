@@ -5,7 +5,7 @@ builder.Logging.AddConfiguration(
     builder.Configuration.GetSection("Logging"));
 builder.Logging.AddConsole();
 builder.Services
-    .AddApiServices(builder.Configuration)
+    .AddApiServices()
     .AddInfrastructureServices(builder.Configuration)
     .AddApplicationServices();
 
