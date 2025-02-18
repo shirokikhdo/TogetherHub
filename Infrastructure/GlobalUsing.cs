@@ -1,4 +1,16 @@
-﻿global using Domain.ValueObjects;
+﻿global using Application.Data.DataBaseContext;
 global using Domain.Models;
+global using Domain.Security;
+global using Domain.ValueObjects;
+global using Infrastructure.Data.DataBaseContext;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.AspNetCore.Builder;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.IdentityModel.Tokens;
+global using System.Reflection;
+global using System.Text;

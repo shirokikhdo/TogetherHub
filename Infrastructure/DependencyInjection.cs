@@ -1,13 +1,4 @@
-﻿using Application.Data.DataBaseContext;
-using Domain.Security;
-using Infrastructure.Data.DataBaseContext;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-
-namespace Infrastructure;
+﻿namespace Infrastructure;
 
 public static class DependencyInjection
 {

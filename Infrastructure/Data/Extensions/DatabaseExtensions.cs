@@ -1,10 +1,4 @@
-﻿using Domain.Security;
-using Infrastructure.Data.DataBaseContext;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Infrastructure.Data.Extensions;
+﻿namespace Infrastructure.Data.Extensions;
 
 public static class DatabaseExtensions
 {
