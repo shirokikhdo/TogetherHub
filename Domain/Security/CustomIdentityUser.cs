@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace Domain.Security;
+﻿namespace Domain.Security;
 
 public class CustomIdentityUser : IdentityUser
 {
