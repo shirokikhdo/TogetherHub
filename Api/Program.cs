@@ -7,7 +7,7 @@ builder.Logging.AddConsole();
 builder.Services
     .AddApiServices(builder.Configuration)
     .AddInfrastructureServices(builder.Configuration)
-    .AddApplicationServices(builder.Configuration);
+    .AddApplicationServices();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

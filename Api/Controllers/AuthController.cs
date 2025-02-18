@@ -1,4 +1,6 @@
-﻿namespace Api.Controllers;
+﻿using Application.Security.Services;
+
+namespace Api.Controllers;
 
 [AllowAnonymous]
 [Route("api/[controller]")]

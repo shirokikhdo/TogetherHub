@@ -1,4 +1,11 @@
-﻿namespace Api.Security.Services;
+﻿using System.Security.Claims;
+using System.Text;
+using Domain.Security;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.IdentityModel.Tokens;
+
+namespace Application.Security.Services;
 
 public class JwtSecurityService : IJwtSecurityService
 {

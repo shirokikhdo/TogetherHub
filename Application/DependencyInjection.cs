@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Application.Security.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application;
@@ -6,10 +6,9 @@ namespace Application;
 public static class DependencyInjection
 {
     public static IServiceCollection AddApplicationServices(
-        this IServiceCollection services,
-        IConfiguration configuration)
+        this IServiceCollection services)
     {
-        //services.AddScoped<ITopicsService, TopicsService>();
+        services.AddScoped<IJwtSecurityService, JwtSecurityService>();
 
         return services;
     }

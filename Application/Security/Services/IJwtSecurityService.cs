@@ -1,4 +1,6 @@
-﻿namespace Api.Security.Services;
+﻿using Domain.Security;
+
+namespace Application.Security.Services;
 
 public interface IJwtSecurityService
 {
