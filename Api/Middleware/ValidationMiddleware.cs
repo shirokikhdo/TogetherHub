@@ -1,5 +1,5 @@
 ﻿using Domain.Security.Dtos;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace Api.Middleware;
 
@@ -35,7 +35,11 @@ public class ValidationMiddleware
 
             try
             {
-                var model = JsonConvert.DeserializeObject<RegisterIdentityUserDto>(body);
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var model = JsonSerializer.Deserialize<RegisterIdentityUserDto>(body, options);
                 if (model?.Password != null && !IsValidPassword(model.Password))
                 {
                     context.Response.StatusCode = 400;
