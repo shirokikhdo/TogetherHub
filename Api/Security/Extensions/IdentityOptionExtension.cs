@@ -1,12 +1,4 @@
-﻿using Api.Security.Services;
-using Domain.Security;
-using Infrastructure.Data.DataBaseContext;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.OpenApi.Models;
-
-namespace Api.Security.Extensions;
+﻿namespace Api.Security.Extensions;
 
 public static class IdentityOptionExtension
 {

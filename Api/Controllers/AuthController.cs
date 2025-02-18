@@ -1,12 +1,4 @@
-﻿using Api.Security.Services;
-using Domain.Security;
-using Domain.Security.Dtos;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-namespace Api.Controllers;
+﻿namespace Api.Controllers;
 
 [AllowAnonymous]
 [Route("api/[controller]")]

@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Api.Exceptions.Handler;
+﻿namespace Api.Exceptions.Handler;
 
 public class CustomExceptionHandler : IExceptionHandler
 {

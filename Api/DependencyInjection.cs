@@ -1,10 +1,4 @@
-﻿using Api.Exceptions.Handler;
-using Api.Middleware;
-using Api.Security.Extensions;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
-
-namespace Api;
+﻿namespace Api;
 
 public static class DependencyInjection
 {

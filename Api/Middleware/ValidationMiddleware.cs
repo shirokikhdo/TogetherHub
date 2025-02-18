@@ -1,7 +1,4 @@
-﻿using Domain.Security.Dtos;
-using System.Text.Json;
-
-namespace Api.Middleware;
+﻿namespace Api.Middleware;
 
 public class ValidationMiddleware
 {
