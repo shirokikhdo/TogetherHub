@@ -1,4 +1,5 @@
 ﻿using Application.Security.Commands.LoginUser;
+using Application.Security.Commands.RegisterUser;
 using Application.Security.Services;
 
 namespace Api.Controllers;
@@ -35,32 +36,12 @@ public class AuthController : ControllerBase
 
     [HttpPost("register")]
     public async Task<IResult> Register(
-        [FromBody] RegisterIdentityUserDto dto)
+        [FromBody] RegisterIdentityUserDto dto,
+        CancellationToken cancellationToken)
     {
-        if (await _userManager.Users.AnyAsync(x => x.Email == dto.Email))
-            return Results.BadRequest("Email занят");
+        var command = new RegisterUserCommand(dto, cancellationToken);
+        var result = await _mediator.Send(command, cancellationToken);
 
-        if (await _userManager.Users.AnyAsync(x => x.UserName == dto.UserName))
-            return Results.BadRequest("UserName занят");
-
-        var user = new CustomIdentityUser
-        {
-            FullName = dto.FullName,
-            Email = dto.Email,
-            UserName = dto.UserName,
-            About = string.Empty
-        };
-
-        var result = await _userManager.CreateAsync(user, dto.Password);
-        if (!result.Succeeded) 
-            return Results.BadRequest(result.Errors);
-        
-        var token = _jwtSecurityService.CreateToken(user);
-        var response = new ResponseIdentityUserDto(
-            user.UserName, 
-            user.Email, 
-            token);
-
-        return Results.Ok(response);
+        return Results.Ok(result);
     }
 }
