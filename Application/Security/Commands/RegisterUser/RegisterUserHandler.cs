@@ -1,9 +1,4 @@
-﻿using Application.Security.Services;
-using Domain.Security.Dtos;
-using Domain.Security;
-using Microsoft.AspNetCore.Identity;
-
-namespace Application.Security.Commands.RegisterUser;
+﻿namespace Application.Security.Commands.RegisterUser;
 
 public class RegisterUserHandler : ICommandHandler<RegisterUserCommand, RegisterUserResult>
 {

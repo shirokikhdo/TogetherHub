@@ -1,7 +1,4 @@
-﻿using Application.Security.Services;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Application;
+﻿namespace Application;
 
 public static class DependencyInjection
 {

@@ -1,5 +1,3 @@
-﻿using Domain.Security.Dtos;
-
-namespace Application.Security.Commands.RegisterUser;
+﻿namespace Application.Security.Commands.RegisterUser;
 
 public record RegisterUserResult(ResponseIdentityUserDto User);

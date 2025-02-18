@@ -1,9 +1,4 @@
-﻿using Application.Security.Services;
-using Domain.Security;
-using Domain.Security.Dtos;
-using Microsoft.AspNetCore.Identity;
-
-namespace Application.Security.Commands.LoginUser;
+﻿namespace Application.Security.Commands.LoginUser;
 
 public class LoginUserHandler : ICommandHandler<LoginUserCommand, LoginUserResult>
 {

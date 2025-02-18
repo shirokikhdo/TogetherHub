@@ -1,6 +1,4 @@
-﻿using Domain.Security.Dtos;
-
-namespace Application.Security.Commands.RegisterUser;
+﻿namespace Application.Security.Commands.RegisterUser;
 
 public record RegisterUserCommand(RegisterIdentityUserDto RegisterIdentityUserDto, CancellationToken CancellationToken) 
     : ICommand<RegisterUserResult>;
