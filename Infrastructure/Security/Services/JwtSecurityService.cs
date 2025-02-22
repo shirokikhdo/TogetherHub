@@ -1,4 +1,4 @@
-﻿namespace Application.Security.Services;
+﻿namespace Infrastructure.Security.Services;
 
 /// <summary>
 /// Реализация сервиса безопасности для работы с JWT (JSON Web Token).

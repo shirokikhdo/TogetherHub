@@ -20,6 +20,7 @@ public static class DependencyInjection
             options => options.UseSqlite(connectionString));
 
         services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+        services.AddScoped<IJwtSecurityService, JwtSecurityService>();
 
         services.AddIdentityCore<CustomIdentityUser>(options =>
         {
