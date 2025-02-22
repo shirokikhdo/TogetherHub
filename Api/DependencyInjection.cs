@@ -1,7 +1,15 @@
 ﻿namespace Api;
 
+/// <summary>
+/// Статический класс для регистрации зависимостей и настройки сервисов приложения.
+/// </summary>
 public static class DependencyInjection
 {
+    /// <summary>
+    /// Добавляет необходимые сервисы для работы API в контейнер зависимостей.
+    /// </summary>
+    /// <param name="services">Коллекция сервисов, в которую будут добавлены новые сервисы.</param>
+    /// <returns>Обновленная коллекция сервисов.</returns>
     public static IServiceCollection AddApiServices(this IServiceCollection services)
     {
         services.AddExceptionHandler<CustomExceptionHandler>();
@@ -30,6 +38,11 @@ public static class DependencyInjection
         return services;
     }
 
+    /// <summary>
+    /// Настраивает middleware для работы API в приложении.
+    /// </summary>
+    /// <param name="app">Экземпляр приложения, к которому будут применены middleware.</param>
+    /// <returns>Обновленный экземпляр приложения.</returns>
     public static WebApplication UseApiServices(this WebApplication app)
     {
         app.UseCors("together-hub-policy");
@@ -48,6 +61,11 @@ public static class DependencyInjection
         return app;
     }
 
+    /// <summary>
+    /// Добавляет и настраивает Swagger для генерации документации API.
+    /// </summary>
+    /// <param name="services">Коллекция сервисов, в которую будут добавлены настройки Swagger.</param>
+    /// <returns>Обновленная коллекция сервисов.</returns>
     private static IServiceCollection AddSwagger(this IServiceCollection services)
     {
         services.AddSwaggerGen(options =>

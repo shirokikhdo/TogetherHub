@@ -1,14 +1,27 @@
 ﻿namespace Application.Security.Services;
 
+/// <summary>
+/// Реализация сервиса безопасности для работы с JWT (JSON Web Token).
+/// </summary>
 public class JwtSecurityService : IJwtSecurityService
 {
     private readonly IConfiguration _configuration;
 
+    /// <summary>
+    /// Инициализирует новый экземпляр класса <see cref="JwtSecurityService"/> 
+    /// с указанной конфигурацией.
+    /// </summary>
+    /// <param name="configuration">Объект конфигурации, содержащий настройки аутентификации.</param>
     public JwtSecurityService(IConfiguration configuration)
     {
         _configuration = configuration;
     }
 
+    /// <summary>
+    /// Создает JWT токен для указанного пользователя.
+    /// </summary>
+    /// <param name="user">Пользователь, для которого создается токен.</param>
+    /// <returns>Сгенерированный JWT токен в виде строки.</returns>
     public string CreateToken(CustomIdentityUser user)
     {
         var secretKey = _configuration["AuthSettings:SecretKey"]!;

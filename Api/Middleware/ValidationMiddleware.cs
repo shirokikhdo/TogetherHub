@@ -1,14 +1,28 @@
 ﻿namespace Api.Middleware;
 
+/// <summary>
+/// Промежуточное ПО для валидации входящих HTTP-запросов.
+/// Обрабатывает запросы на регистрацию пользователей и проверяет корректность используемых методов и данных.
+/// </summary>
 public class ValidationMiddleware
 {
     private readonly RequestDelegate _next;
 
+    /// <summary>
+    /// Инициализирует новый экземпляр класса <see cref="ValidationMiddleware"/>.
+    /// </summary>
+    /// <param name="next">Следующий делегат в конвейере обработки запросов.</param>
     public ValidationMiddleware(RequestDelegate next)
     {
         _next = next;
     }
 
+    /// <summary>
+    /// Асинхронно обрабатывает HTTP-запрос.
+    /// Проверяет метод запроса и валидирует данные для регистрации пользователя.
+    /// </summary>
+    /// <param name="context">Контекст HTTP, содержащий информацию о текущем запросе и ответе.</param>
+    /// <returns>Асинхронная задача, представляющая результат обработки запроса.</returns>
     public async Task InvokeAsync(HttpContext context)
     {
         if (context.Request.Method.Equals("GET")
@@ -66,6 +80,11 @@ public class ValidationMiddleware
         }
     }
 
+    /// <summary>
+    /// Проверяет, является ли пароль допустимым по заданным критериям.
+    /// </summary>
+    /// <param name="password">Пароль, который необходимо проверить.</param>
+    /// <returns><c>true</c>, если пароль допустим; в противном случае <c>false</c>.</returns>
     private bool IsValidPassword(string password) =>
         password.Length is >= 4 and <= 8 
         && password.Any(char.IsDigit);

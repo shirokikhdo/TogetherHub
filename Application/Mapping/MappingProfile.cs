@@ -1,7 +1,14 @@
 ﻿namespace Application.Mapping;
 
+/// <summary>
+/// Профиль отображения для преобразования объектов данных в сущности и обратно.
+/// Используется для конфигурации маппинга между DTO и сущностями.
+/// </summary>
 public class MappingProfile : Profile
 {
+    /// <summary>
+    /// Конструктор, который настраивает правила маппинга.
+    /// </summary>
     public MappingProfile()
     {
         CreateMap<UpdateTopicDto, Topic>()

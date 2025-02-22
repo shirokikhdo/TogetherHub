@@ -1,7 +1,18 @@
 ﻿namespace Infrastructure;
 
+/// <summary>
+/// Класс, содержащий методы для настройки зависимостей и сервисов инфраструктуры.
+/// Предоставляет методы для регистрации контекста базы данных, идентификации и аутентификации пользователей.
+/// </summary>
 public static class DependencyInjection
 {
+    /// <summary>
+    /// Метод расширения для добавления инфраструктурных сервисов в контейнер зависимостей.
+    /// Регистрация контекста базы данных, идентификации пользователей и аутентификации с использованием JWT.
+    /// </summary>
+    /// <param name="services">Коллекция сервисов, в которую будут добавлены инфраструктурные сервисы.</param>
+    /// <param name="configuration">Объект конфигурации, используемый для получения строк подключения и других параметров.</param>
+    /// <returns>Обновленная коллекция сервисов.</returns>
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("SqLiteConnection");

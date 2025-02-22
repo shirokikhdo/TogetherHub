@@ -1,6 +1,5 @@
 ﻿global using Api;
 global using Api.Exceptions.Handler;
-global using Api.Middleware;
 global using Application.Dtos;
 global using Application.Exceptions;
 global using Application.Mapping;

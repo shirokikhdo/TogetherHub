@@ -1,13 +1,46 @@
 ﻿namespace Domain.Models;
 
+/// <summary>
+/// Представляет тему, которая содержит информацию о событии.
+/// </summary>
 public class Topic : Entity<TopicId>
 {
+    /// <summary>
+    /// Получает или задает заголовок темы.
+    /// </summary>
     public string Title { get; set; } = default!;
+
+    /// <summary>
+    /// Получает или задает дату и время начала события.
+    /// </summary>
     public DateTime? EventStart { get; set; } = default!;
+
+    /// <summary>
+    /// Получает или задает краткое описание темы.
+    /// </summary>
     public string Summary { get; set; } = default!;
+
+    /// <summary>
+    /// Получает или задает тип темы.
+    /// </summary>
     public string TopicType { get; set; } = default!;
+
+    /// <summary>
+    /// Получает или задает местоположение события.
+    /// </summary>
     public Location Location { get; set; } = default!;
 
+    /// <summary>
+    /// Создает новый экземпляр темы с заданными параметрами.
+    /// </summary>
+    /// <param name="topicId">Идентификатор темы.</param>
+    /// <param name="title">Заголовок темы.</param>
+    /// <param name="eventStart">Дата и время начала события.</param>
+    /// <param name="summary">Краткое описание темы.</param>
+    /// <param name="topicType">Тип темы.</param>
+    /// <param name="location">Местоположение события.</param>
+    /// <returns>Созданный экземпляр темы.</returns>
+    /// <exception cref="ArgumentException">Если заголовок, описание или тип темы пусты.</exception>
     public static Topic Create(
         TopicId topicId,
         string title,

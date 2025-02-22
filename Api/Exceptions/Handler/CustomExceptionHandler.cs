@@ -1,15 +1,30 @@
 ﻿namespace Api.Exceptions.Handler;
 
+/// <summary>
+/// Класс для обработки исключений в приложении.
+/// Реализует интерфейс <see cref="IExceptionHandler"/> и предоставляет механизм логирования и формирования ответов на исключения.
+/// </summary>
 public class CustomExceptionHandler : IExceptionHandler
 {
     private readonly ILogger<CustomExceptionHandler> _logger;
 
+    /// <summary>
+    /// Инициализирует новый экземпляр класса <see cref="CustomExceptionHandler"/>.
+    /// </summary>
+    /// <param name="logger">Логгер для записи информации об исключениях.</param>
     public CustomExceptionHandler(
         ILogger<CustomExceptionHandler> logger)
     {
         _logger = logger;
     }
 
+    /// <summary>
+    /// Попытка обработки исключения асинхронно.
+    /// </summary>
+    /// <param name="httpContext">Контекст HTTP, содержащий информацию о запросе и ответе.</param>
+    /// <param name="exception">Исключение, которое необходимо обработать.</param>
+    /// <param name="cancellationToken">Токен отмены для асинхронной операции.</param>
+    /// <returns>Значение, указывающее, была ли обработка успешной.</returns>
     public async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext, 
         Exception exception, 
