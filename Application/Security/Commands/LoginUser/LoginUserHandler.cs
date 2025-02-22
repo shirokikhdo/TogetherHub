@@ -19,11 +19,11 @@ public class LoginUserHandler : ICommandHandler<LoginUserCommand, LoginUserResul
 
         var user = await _userManager.FindByEmailAsync(dto.Email);
         if (user is null)
-            return null;
+            throw new UserNotFoundException(dto.Email);
 
         var result = await _userManager.CheckPasswordAsync(user, dto.Password);
         if (!result)
-            return null;
+            throw new WrongPasswordException(user.Email!, dto.Password);
 
         var token = _jwtSecurityService.CreateToken(user);
         var response = new ResponseIdentityUserDto(

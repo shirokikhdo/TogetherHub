@@ -23,6 +23,18 @@ public class CustomExceptionHandler : IExceptionHandler
                 exception.GetType().Name,
                 httpContext.Response.StatusCode = StatusCodes.Status404NotFound),
 
+            UserExistsException => (exception.Message, 
+                exception.GetType().Name,
+                httpContext.Response.StatusCode = StatusCodes.Status400BadRequest),
+
+            WrongPasswordException => (exception.Message, 
+                exception.GetType().Name,
+                httpContext.Response.StatusCode = StatusCodes.Status400BadRequest),
+
+            CreatingUserException => (exception.Message, 
+                exception.GetType().Name,
+                httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError),
+
             _ => (exception.Message,
                 exception.GetType().Name,
                 httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError),

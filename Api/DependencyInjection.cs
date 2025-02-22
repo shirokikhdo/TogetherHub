@@ -33,7 +33,7 @@ public static class DependencyInjection
     public static WebApplication UseApiServices(this WebApplication app)
     {
         app.UseCors("together-hub-policy");
-        app.UseMiddleware<ValidationMiddleware>();
+        //app.UseMiddleware<ValidationMiddleware>();
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();

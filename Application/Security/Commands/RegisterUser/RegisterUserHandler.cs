@@ -17,13 +17,13 @@ public class RegisterUserHandler : ICommandHandler<RegisterUserCommand, Register
     {
         var dto = request.RegisterIdentityUserDto;
 
-        if (await _userManager.Users.AnyAsync(x => 
+        if (await _userManager.Users.AnyAsync(x =>
                 x.Email == dto.Email, cancellationToken))
-            return null;
+            throw new EmailExistsException(dto.Email);
 
-        if (await _userManager.Users.AnyAsync(x => 
+        if (await _userManager.Users.AnyAsync(x =>
                 x.UserName == dto.UserName, cancellationToken))
-            return null;
+            throw new UserNameExistsException(dto.UserName);
 
         var user = new CustomIdentityUser
         {
@@ -35,7 +35,7 @@ public class RegisterUserHandler : ICommandHandler<RegisterUserCommand, Register
 
         var result = await _userManager.CreateAsync(user, dto.Password);
         if (!result.Succeeded)
-            return null;
+            throw new CreatingUserException(user, dto.Password);
 
         var token = _jwtSecurityService.CreateToken(user);
         var response = new ResponseIdentityUserDto(
