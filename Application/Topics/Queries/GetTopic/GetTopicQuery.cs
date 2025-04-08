@@ -1,4 +1,8 @@
 ﻿namespace Application.Topics.Queries.GetTopic;
 
-public record GetTopicQuery(Guid Id, CancellationToken CancellationToken)
+/// <summary>
+/// Запрос на получение информации о теме.
+/// </summary>
+/// <param name="Id">Уникальный идентификатор темы.</param>
+public record GetTopicQuery(Guid Id)
     : IQuery<GetTopicResult>;

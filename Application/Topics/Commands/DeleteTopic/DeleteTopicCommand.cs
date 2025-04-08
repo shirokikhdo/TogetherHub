@@ -1,4 +1,8 @@
 ﻿namespace Application.Topics.Commands.DeleteTopic;
 
-public record DeleteTopicCommand(Guid Id, CancellationToken CancellationToken) 
+/// <summary>
+/// Команда для удаления темы.
+/// </summary>
+/// <param name="Id">Уникальный идентификатор темы, которую необходимо удалить.</param>
+public record DeleteTopicCommand(Guid Id) 
     : ICommand<DeleteTopicResult>;

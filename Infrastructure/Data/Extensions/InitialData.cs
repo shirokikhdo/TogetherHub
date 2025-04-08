@@ -1,9 +1,15 @@
-﻿using Domain.Security;
+﻿namespace Infrastructure.Data.Extensions;
 
-namespace Infrastructure.Data.Extensions;
-
+/// <summary>
+/// Класс, содержащий начальные данные для заполнения базы данных.
+/// Содержит коллекции тем и пользователей, которые будут использоваться при инициализации базы данных.
+/// </summary>
 public static class InitialData
 {
+    /// <summary>
+    /// Получает коллекцию тем для инициализации базы данных.
+    /// Каждая тема содержит информацию о мероприятии, включая название, дату, описание и место проведения.
+    /// </summary>
     public static IEnumerable<Topic> Topics =>
         new List<Topic>
         {
@@ -49,6 +55,10 @@ public static class InitialData
             )
         };
 
+    /// <summary>
+    /// Получает коллекцию пользователей для инициализации базы данных.
+    /// Каждый пользователь содержит информацию о имени, электронной почте и описании.
+    /// </summary>
     public static IEnumerable<CustomIdentityUser> Users =>
         new List<CustomIdentityUser>
         {

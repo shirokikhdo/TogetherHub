@@ -1,13 +1,17 @@
-﻿using Domain.Security;
-using Infrastructure.Data.DataBaseContext;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
+﻿namespace Infrastructure.Data.Extensions;
 
-namespace Infrastructure.Data.Extensions;
-
+/// <summary>
+/// Расширения для работы с базой данных.
+/// Содержит методы для инициализации базы данных и заполнения её начальными данными.
+/// </summary>
 public static class DatabaseExtensions
 {
+    /// <summary>
+    /// Асинхронно инициализирует базу данных приложения.
+    /// Выполняет миграции базы данных и заполняет её начальными данными.
+    /// </summary>
+    /// <param name="app">Экземпляр приложения, для которого будет выполняться инициализация базы данных.</param>
+    /// <returns>Задача, представляющая асинхронную операцию.</returns>
     public static async Task InitializeDatabaseAsync(this WebApplication app)
     {
         using var scope = app.Services.CreateScope();
@@ -23,6 +27,12 @@ public static class DatabaseExtensions
         await SeedData(dbContext, userManager);
     }
 
+    /// <summary>
+    /// Заполняет базу данных начальными данными.
+    /// </summary>
+    /// <param name="dbContext">Контекст базы данных для доступа к сущностям.</param>
+    /// <param name="userManager">Менеджер пользователей для управления пользователями.</param>
+    /// <returns>Задача, представляющая асинхронную операцию.</returns>
     private static async Task SeedData(
         ApplicationDbContext dbContext, 
         UserManager<CustomIdentityUser> userManager)
@@ -31,6 +41,11 @@ public static class DatabaseExtensions
         await SeedUsersAsync(userManager);
     }
 
+    /// <summary>
+    /// Заполняет базу данных начальными темами, если они отсутствуют.
+    /// </summary>
+    /// <param name="dbContext">Контекст базы данных для доступа к сущности тем.</param>
+    /// <returns>Задача, представляющая асинхронную операцию.</returns>
     private static async Task SeedTopicsAsync(ApplicationDbContext dbContext)
     {
         if (!await dbContext.Topics.AnyAsync())
@@ -40,6 +55,11 @@ public static class DatabaseExtensions
         }
     }
 
+    /// <summary>
+    /// Заполняет базу данных начальными пользователями, если они отсутствуют.
+    /// </summary>
+    /// <param name="userManager">Менеджер пользователей для управления пользователями.</param>
+    /// <returns>Задача, представляющая асинхронную операцию.</returns>
     private static async Task SeedUsersAsync(UserManager<CustomIdentityUser> userManager)
     {
         if (!await userManager.Users.AnyAsync())

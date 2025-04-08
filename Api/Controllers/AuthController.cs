@@ -1,78 +1,56 @@
-﻿using Api.Security.Services;
-using Domain.Security;
-using Domain.Security.Dtos;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿namespace Api.Controllers;
 
-namespace Api.Controllers;
-
+/// <summary>
+/// Контроллер для аутентификации пользователей.
+/// Позволяет выполнять операции входа и регистрации пользователей.
+/// </summary>
 [AllowAnonymous]
 [Route("api/[controller]")]
 [ApiController]
 public class AuthController : ControllerBase
 {
-    private readonly UserManager<CustomIdentityUser> _userManager;
-    private readonly IJwtSecurityService _jwtSecurityService;
+    private readonly IMediator _mediator;
 
-    public AuthController(
-        UserManager<CustomIdentityUser> userManager, 
-        IJwtSecurityService jwtSecurityService)
+    /// <summary>
+    /// Инициализирует новый экземпляр класса <see cref="AuthController"/>.
+    /// </summary>
+    /// <param name="mediator">Экземпляр медиатора для обработки команд.</param>
+    public AuthController(IMediator mediator)
     {
-        _userManager = userManager;
-        _jwtSecurityService = jwtSecurityService;
+        _mediator = mediator;
     }
 
+    /// <summary>
+    /// Выполняет вход пользователя в систему.
+    /// </summary>
+    /// <param name="dto">Объект данных для входа пользователя.</param>
+    /// <param name="cancellationToken">Токен отмены для асинхронной операции.</param>
+    /// <returns>Результат выполнения операции входа.</returns>
     [HttpPost("login")]
     public async Task<IResult> Login(
-        [FromBody] LoginIdentityUserDto dto)
+        [FromBody] LoginIdentityUserDto dto,
+        CancellationToken cancellationToken)
     {
-        var user = await _userManager.FindByEmailAsync(dto.Email);
-        if (user is null)
-            return Results.Unauthorized();
+        var command = new LoginUserCommand(dto);
+        var result = await _mediator.Send(command, cancellationToken);
 
-        var result = await _userManager.CheckPasswordAsync(user, dto.Password);
-        if (!result) 
-            return Results.Unauthorized();
-
-        var token = _jwtSecurityService.CreateToken(user);
-        var response = new ResponseIdentityUserDto(
-            user.UserName!, 
-            user.Email!, 
-            token);
-
-        return Results.Ok(response);
+        return Results.Ok(result);
     }
 
+    /// <summary>
+    /// Регистрирует нового пользователя в системе.
+    /// </summary>
+    /// <param name="dto">Объект данных для регистрации пользователя.</param>
+    /// <param name="cancellationToken">Токен отмены для асинхронной операции.</param>
+    /// <returns>Результат выполнения операции регистрации.</returns>
     [HttpPost("register")]
     public async Task<IResult> Register(
-        [FromBody] RegisterIdentityUserDto dto)
+        [FromBody] RegisterIdentityUserDto dto,
+        CancellationToken cancellationToken)
     {
-        if (await _userManager.Users.AnyAsync(x => x.Email == dto.Email))
-            return Results.BadRequest("Email занят");
+        var command = new RegisterUserCommand(dto);
+        var result = await _mediator.Send(command, cancellationToken);
 
-        if (await _userManager.Users.AnyAsync(x => x.UserName == dto.UserName))
-            return Results.BadRequest("UserName занят");
-
-        var user = new CustomIdentityUser
-        {
-            FullName = dto.FullName,
-            Email = dto.Email,
-            UserName = dto.UserName,
-            About = string.Empty
-        };
-
-        var result = await _userManager.CreateAsync(user, dto.Password);
-        if (!result.Succeeded) 
-            return Results.BadRequest(result.Errors);
-        
-        var token = _jwtSecurityService.CreateToken(user);
-        var response = new ResponseIdentityUserDto(
-            user.UserName, 
-            user.Email, 
-            token);
-
-        return Results.Ok(response);
+        return Results.Ok(result);
     }
 }
