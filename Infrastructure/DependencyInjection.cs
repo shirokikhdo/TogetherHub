@@ -21,6 +21,9 @@ public static class DependencyInjection
 
         services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
         services.AddScoped<IJwtSecurityService, JwtSecurityService>();
+        
+        services.AddHttpContextAccessor();
+        services.AddScoped<IUserAccessor, UserAccessor>();
 
         services.AddIdentityCore<CustomIdentityUser>(options =>
         {
