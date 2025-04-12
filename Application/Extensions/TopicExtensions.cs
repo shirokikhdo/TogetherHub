@@ -18,7 +18,12 @@ public static class TopicExtensions
             topic.TopicType,
             new LocationDto(topic.Location.City, topic.Location.Street),
             topic.EventStart,
-            topic.Users);
+            topic.Users.Select(x=>new UserProfileDto(
+                x.CurrentUser.Id,
+                x.CurrentUser.UserName!,
+                x.CurrentUser.FullName,
+                x.Role.ToString()))
+                .ToList());
 
     /// <summary>
     /// Преобразует список объектов типа <see cref="Topic"/> в список объектов типа <see cref="ResponseTopicDto"/>.

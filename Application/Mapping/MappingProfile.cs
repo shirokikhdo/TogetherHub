@@ -43,5 +43,21 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Id,
                 options => options.MapFrom(_ => TopicId.Of(Guid.NewGuid())));
 
+        CreateMap<UserProfileDto, CustomIdentityUser>()
+            .ForMember(dest => dest.Id,
+                options => options.MapFrom(src => src.Id))
+            .ForMember(dest => dest.UserName,
+                options => options.MapFrom(src => src.Username));
+            //.ForMember(dest => dest.FullName,
+            //    options => options.MapFrom(src => src.FullName));
+
+        CreateMap<RelationshipDto, Relationship>()
+            .ForMember(dest => dest.TopicReference,
+                options => options.MapFrom(src => src.TopicReference))
+            .ForMember(dest => dest.UserReference,
+                options => options.MapFrom(src => src.UserReference))
+            .ForMember(dest => dest.Role,
+                options => options.MapFrom(src => src.Role));
+
     }
 }
