@@ -32,6 +32,16 @@ public class DeleteTopicHandler : ICommandHandler<DeleteTopicCommand, DeleteTopi
         if (topic is null || topic.IsDeleted)
             throw new TopicNotFoundException(id);
 
+        var relationships = await _dbContext.Relationships
+            .Where(x => x.TopicReference == topicId)
+            .ToListAsync(cancellationToken);
+
+        foreach (var relationship in relationships)
+        {
+            relationship.IsDeleted = true;
+            relationship.DeletedAt = DateTime.UtcNow;
+        }
+
         topic.IsDeleted = true;
         topic.DeletedAt = DateTime.UtcNow;
 
