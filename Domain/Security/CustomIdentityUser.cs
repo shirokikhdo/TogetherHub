@@ -1,4 +1,6 @@
-﻿namespace Domain.Security;
+﻿using Domain.Models;
+
+namespace Domain.Security;
 
 /// <summary>
 /// Представляет пользовательскую сущность, расширяющую стандартную 
@@ -15,4 +17,6 @@ public class CustomIdentityUser : IdentityUser
     /// Получает или задает информацию о пользователе.
     /// </summary>
     public string About { get; set; } = default!;
+
+    public List<Relationship> Topics { get; set; } = new List<Relationship>();
 }

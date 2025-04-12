@@ -10,6 +10,8 @@ public interface IApplicationDbContext
     /// </summary>
     public DbSet<Topic> Topics { get; }
 
+    public DbSet<Relationship> Relationships { get; }
+
     /// <summary>
     /// Асинхронно сохраняет изменения в базе данных.
     /// </summary>

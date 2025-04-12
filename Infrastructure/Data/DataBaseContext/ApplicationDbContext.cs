@@ -4,13 +4,17 @@
 /// Контекст базы данных для приложения, наследующий от <see cref="IdentityDbContext{TUser}"/>.
 /// Управляет сущностями и их конфигурацией в базе данных.
 /// </summary>
-public class ApplicationDbContext : IdentityDbContext<CustomIdentityUser>, IApplicationDbContext
+public class ApplicationDbContext 
+    : IdentityDbContext<CustomIdentityUser>, IApplicationDbContext
 {
     /// <summary>
     /// Получает набор сущностей <see cref="Topic"/> для работы с темами в базе данных.
     /// </summary>
     public DbSet<Topic> Topics => 
         Set<Topic>();
+
+    public DbSet<Relationship> Relationships =>
+        Set<Relationship>();
 
     /// <summary>
     /// Инициализирует новый экземпляр <see cref="ApplicationDbContext"/> с указанными параметрами конфигурации.

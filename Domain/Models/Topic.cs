@@ -30,6 +30,8 @@ public class Topic : Entity<TopicId>
     /// </summary>
     public Location Location { get; set; } = default!;
 
+    public List<Relationship> Users { get; set; } = new List<Relationship>();
+
     /// <summary>
     /// Создает новый экземпляр темы с заданными параметрами.
     /// </summary>

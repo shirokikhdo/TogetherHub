@@ -1,0 +1,19 @@
+﻿namespace Domain.ValueObjects;
+
+public class RelationshipId
+{
+    public Guid Value { get; }
+
+    private RelationshipId(Guid value)
+    {
+        Value = value;
+    }
+
+    public static RelationshipId Of(Guid value)
+    {
+        if (value == Guid.Empty)
+            throw new DomainException("RelationshipId не может быть пустым");
+
+        return new RelationshipId(value);
+    }
+}
