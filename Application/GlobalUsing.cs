@@ -1,4 +1,5 @@
 ﻿global using Application.Data.DataBaseContext;
+global using Application.Exceptions;
 global using Application.Extensions;
 global using Application.Security.Dtos;
 global using Application.Security.Services;
