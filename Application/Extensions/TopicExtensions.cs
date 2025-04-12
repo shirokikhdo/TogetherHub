@@ -17,7 +17,8 @@ public static class TopicExtensions
             topic.Summary,
             topic.TopicType,
             new LocationDto(topic.Location.City, topic.Location.Street),
-            topic.EventStart);
+            topic.EventStart,
+            topic.Users);
 
     /// <summary>
     /// Преобразует список объектов типа <see cref="Topic"/> в список объектов типа <see cref="ResponseTopicDto"/>.
