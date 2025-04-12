@@ -1,10 +1,12 @@
-﻿global using Application.Data.DataBaseContext;
+﻿global using Application.Comments.Dtos;
+global using Application.Data.DataBaseContext;
 global using Application.Exceptions;
 global using Application.Extensions;
 global using Application.Security.Dtos;
 global using Application.Security.Services;
 global using Application.Topics.Dtos;
 global using AutoMapper;
+global using AutoMapper.QueryableExtensions;
 global using Domain.Enums;
 global using Domain.Exceptions;
 global using Domain.Models;

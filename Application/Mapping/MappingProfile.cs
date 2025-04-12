@@ -59,5 +59,12 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Role,
                 options => options.MapFrom(src => src.Role));
 
+        CreateMap<Comment, ResponseCommentDto>()
+            .ForMember(dest => dest.Username,
+                options => options.MapFrom(src => src.Author.UserName))
+            .ForMember(dest => dest.FullName,
+                options => options.MapFrom(src => src.Author.FullName))
+            .ForMember(dest => dest.Id,
+                options => options.MapFrom(src => src.Id.Value));
     }
 }

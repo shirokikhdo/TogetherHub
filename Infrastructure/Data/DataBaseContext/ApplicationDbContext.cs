@@ -16,6 +16,9 @@ public class ApplicationDbContext
     public DbSet<Relationship> Relationships =>
         Set<Relationship>();
 
+    public DbSet<Comment> Comments => 
+        Set<Comment>();
+
     /// <summary>
     /// Инициализирует новый экземпляр <see cref="ApplicationDbContext"/> с указанными параметрами конфигурации.
     /// </summary>

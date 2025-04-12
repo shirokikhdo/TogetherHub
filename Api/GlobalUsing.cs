@@ -1,5 +1,8 @@
 ﻿global using Api;
 global using Api.Exceptions.Handler;
+global using Application.Comments.Commands.CreateComment;
+global using Application.Comments.Dtos;
+global using Application.Comments.Queries.GetComments;
 global using Application.Mapping;
 global using Application.Security.Dtos;
 global using Application.Security.Commands.LoginUser;

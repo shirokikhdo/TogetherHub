@@ -12,6 +12,8 @@ public interface IApplicationDbContext
 
     DbSet<Relationship> Relationships { get; }
 
+    DbSet<Comment> Comments { get; }
+
     DbSet<CustomIdentityUser> Users { get; set; }
 
     /// <summary>

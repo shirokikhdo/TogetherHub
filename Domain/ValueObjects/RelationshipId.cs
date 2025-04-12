@@ -1,6 +1,6 @@
 ﻿namespace Domain.ValueObjects;
 
-public class RelationshipId
+public record RelationshipId
 {
     public Guid Value { get; }
 

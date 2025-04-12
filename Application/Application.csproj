@@ -18,6 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Comments\Dtos\" />
+    <Folder Include="Comments\Queries\GetComments\" />
     <Folder Include="Topics\Commands\JoinLeaveTopic\" />
   </ItemGroup>
 

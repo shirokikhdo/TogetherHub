@@ -34,6 +34,8 @@ public class Topic : Entity<TopicId>
 
     public List<Relationship> Users { get; set; } = new List<Relationship>();
 
+    public List<Comment> Comments { get; set; } = new List<Comment>();
+
     /// <summary>
     /// Создает новый экземпляр темы с заданными параметрами.
     /// </summary>
