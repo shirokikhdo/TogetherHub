@@ -1,4 +1,6 @@
-﻿namespace Api.Controllers;
+﻿using Application.Topics.Commands.JoinLeaveTopic;
+
+namespace Api.Controllers;
 
 /// <summary>
 /// Контроллер для управления темами.
@@ -92,6 +94,16 @@ public class TopicsController : ControllerBase
         CancellationToken cancellationToken)
     {
         var command = new DeleteTopicCommand(id);
+        var result = await _mediator.Send(command, cancellationToken);
+        return Results.Ok(result);
+    }
+
+    [HttpPost("join/{id:guid}")]
+    public async Task<IResult> JoinLeaveTopic(
+        Guid id,
+        CancellationToken cancellationToken)
+    {
+        var command = new JoinLeaveTopicCommand(id);
         var result = await _mediator.Send(command, cancellationToken);
         return Results.Ok(result);
     }
