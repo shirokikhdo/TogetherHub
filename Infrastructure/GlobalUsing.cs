@@ -6,6 +6,7 @@ global using Domain.ValueObjects;
 global using Infrastructure.Data.DataBaseContext;
 global using Infrastructure.Security.Services;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.AspNetCore.Identity;

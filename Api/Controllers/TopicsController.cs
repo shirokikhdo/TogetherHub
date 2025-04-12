@@ -89,6 +89,7 @@ public class TopicsController : ControllerBase
     /// <param name="cancellationToken">Токен отмены для асинхронной операции.</param>
     /// <returns>Результат выполнения операции удаления темы.</returns>
     [HttpDelete("{id:guid}")]
+    [Authorize(Policy = "IsTopicAuthor")]
     public async Task<IResult> DeleteTopic(
         Guid id,
         CancellationToken cancellationToken)

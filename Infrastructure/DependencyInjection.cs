@@ -1,4 +1,6 @@
-﻿namespace Infrastructure;
+﻿using Infrastructure.Security.Auth;
+
+namespace Infrastructure;
 
 /// <summary>
 /// Класс, содержащий методы для настройки зависимостей и сервисов инфраструктуры.
@@ -24,6 +26,15 @@ public static class DependencyInjection
         
         services.AddHttpContextAccessor();
         services.AddScoped<IUserAccessor, UserAccessor>();
+
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("IsTopicAuthor", policy =>
+            {
+                policy.Requirements.Add(new TopicDeletionRequirement());
+            });
+        });
+        services.AddTransient<IAuthorizationHandler, TopicDeletionRequirementHandler>();
 
         services.AddIdentityCore<CustomIdentityUser>(options =>
         {
