@@ -30,6 +30,8 @@ public class Topic : Entity<TopicId>
     /// </summary>
     public Location Location { get; set; } = default!;
 
+    public bool IsVoided { get; set; } = default!;
+
     public List<Relationship> Users { get; set; } = new List<Relationship>();
 
     /// <summary>
