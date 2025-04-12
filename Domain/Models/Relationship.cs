@@ -1,6 +1,4 @@
-﻿using Domain.Enums;
-
-namespace Domain.Models;
+﻿namespace Domain.Models;
 
 public class Relationship : Entity<RelationshipId>
 {

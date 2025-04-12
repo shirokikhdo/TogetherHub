@@ -1,6 +1,4 @@
-﻿using Domain.Models;
-
-namespace Domain.Security;
+﻿namespace Domain.Security;
 
 /// <summary>
 /// Представляет пользовательскую сущность, расширяющую стандартную 
