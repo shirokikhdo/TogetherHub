@@ -1,9 +1,9 @@
-﻿namespace Application.Exceptions;
+﻿namespace Domain.Exceptions;
 
 /// <summary>
 /// Исключение, возникающее, когда пользователь уже существует.
 /// </summary>
-public class UserExistsException : Exception
+public class UserExistsException : DomainException
 {
     /// <summary>
     /// Инициализирует новый экземпляр класса <see cref="UserExistsException"/> 

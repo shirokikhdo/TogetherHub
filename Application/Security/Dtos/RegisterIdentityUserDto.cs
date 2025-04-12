@@ -1,4 +1,4 @@
-﻿namespace Domain.Security.Dtos;
+﻿namespace Application.Security.Dtos;
 
 /// <summary>
 /// Представляет данные для регистрации пользователя, включая полное имя, имя пользователя, электронную почту и пароль.

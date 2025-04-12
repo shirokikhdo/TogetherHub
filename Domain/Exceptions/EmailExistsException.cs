@@ -1,4 +1,4 @@
-﻿namespace Application.Exceptions;
+﻿namespace Domain.Exceptions;
 
 /// <summary>
 /// Исключение, возникающее, когда пользователь с указанным адресом электронной почты уже существует.

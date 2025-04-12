@@ -1,4 +1,4 @@
-﻿namespace Application.Dtos;
+﻿namespace Application.Topics.Dtos;
 
 /// <summary>
 /// DTO (Data Transfer Object) для представления темы ответа.

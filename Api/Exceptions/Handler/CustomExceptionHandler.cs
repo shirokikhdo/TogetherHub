@@ -48,7 +48,7 @@ public class CustomExceptionHandler : IExceptionHandler
 
             CreatingUserException => (exception.Message, 
                 exception.GetType().Name,
-                httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError),
+                httpContext.Response.StatusCode = StatusCodes.Status400BadRequest),
 
             _ => (exception.Message,
                 exception.GetType().Name,

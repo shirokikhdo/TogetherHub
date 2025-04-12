@@ -1,9 +1,9 @@
-﻿namespace Application.Exceptions;
+﻿namespace Domain.Exceptions;
 
 /// <summary>
 /// Исключение, возникающее, когда введённый пароль неверен для указанного пользователя.
 /// </summary>
-public class WrongPasswordException : Exception
+public class WrongPasswordException : DomainException
 {
     /// <summary>
     /// Инициализирует новый экземпляр класса <see cref="WrongPasswordException"/> 

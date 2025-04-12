@@ -1,4 +1,4 @@
-﻿namespace Domain.Security.Dtos;
+﻿namespace Application.Security.Dtos;
 
 /// <summary>
 /// Представляет данные для входа пользователя, включая электронную почту и пароль.

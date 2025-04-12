@@ -1,9 +1,9 @@
-﻿namespace Application.Exceptions;
+﻿namespace Domain.Exceptions;
 
 /// <summary>
 /// Исключение, возникающее, когда запрашиваемый ресурс не найден.
 /// </summary>
-public class NotFoundException : Exception
+public class NotFoundException : DomainException
 {
     /// <summary>
     /// Инициализирует новый экземпляр класса <see cref="NotFoundException"/> 

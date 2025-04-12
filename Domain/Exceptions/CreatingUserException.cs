@@ -1,9 +1,9 @@
-﻿namespace Application.Exceptions;
+﻿namespace Domain.Exceptions;
 
 /// <summary>
 /// Исключение, возникающее при ошибке создания пользователя.
 /// </summary>
-public class CreatingUserException : Exception
+public class CreatingUserException : DomainException
 {
     /// <summary>
     /// Инициализирует новый экземпляр класса <see cref="CreatingUserException"/> 

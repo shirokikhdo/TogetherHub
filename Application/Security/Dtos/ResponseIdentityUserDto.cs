@@ -1,4 +1,4 @@
-﻿namespace Domain.Security.Dtos;
+﻿namespace Application.Security.Dtos;
 
 /// <summary>
 /// Представляет ответ для пользователя после успешной аутентификации,
