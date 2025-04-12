@@ -46,6 +46,23 @@ public static class DependencyInjection
     public static WebApplication UseApiServices(this WebApplication app)
     {
         app.UseCors("together-hub-policy");
+
+        app.UseStatusCodePages(async context =>
+        {
+            if (context.HttpContext.Response.StatusCode == 403)
+            {
+                var details = new ProblemDetails
+                {
+                    Title = "Forbidden",
+                    Detail = "У вас недостаточно прав для этого действия",
+                    Status = StatusCodes.Status403Forbidden,
+                    Instance = context.HttpContext.Request.Path
+                };
+                details.Extensions.Add("traceId", context.HttpContext.TraceIdentifier);
+                await context.HttpContext.Response.WriteAsJsonAsync(details);
+            }
+        });
+
         //app.UseMiddleware<ValidationMiddleware>();
         if (app.Environment.IsDevelopment())
         {
