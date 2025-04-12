@@ -1,6 +1,4 @@
-﻿using Domain.Enums;
-
-namespace Infrastructure.Security.Auth;
+﻿namespace Infrastructure.Security.Auth;
 
 public class TopicDeletionRequirementHandler 
     : AuthorizationHandler<TopicDeletionRequirement>

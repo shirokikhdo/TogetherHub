@@ -1,6 +1,4 @@
-﻿using Infrastructure.Security.Auth;
-
-namespace Infrastructure;
+﻿namespace Infrastructure;
 
 /// <summary>
 /// Класс, содержащий методы для настройки зависимостей и сервисов инфраструктуры.

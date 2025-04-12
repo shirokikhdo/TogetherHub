@@ -1,6 +1,4 @@
-﻿using Application.Topics.Commands.JoinLeaveTopic;
-
-namespace Api.Controllers;
+﻿namespace Api.Controllers;
 
 /// <summary>
 /// Контроллер для управления темами.

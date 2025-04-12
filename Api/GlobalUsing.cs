@@ -6,6 +6,7 @@ global using Application.Security.Commands.LoginUser;
 global using Application.Security.Commands.RegisterUser;
 global using Application.Topics.Commands.CreateTopic;
 global using Application.Topics.Commands.DeleteTopic;
+global using Application.Topics.Commands.JoinLeaveTopic;
 global using Application.Topics.Commands.UpdateTopic;
 global using Application.Topics.Dtos;
 global using Application.Topics.Queries.GetTopic;
