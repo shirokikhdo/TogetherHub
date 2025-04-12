@@ -3,5 +3,5 @@
 public record UserProfileDto(
     string Id,
     string Username,
-    string Email,
+    string FullName,
     string Role);

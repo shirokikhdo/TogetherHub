@@ -32,7 +32,9 @@ public class GetTopicHandler : IQueryHandler<GetTopicQuery, GetTopicResult>
         var id = request.Id;
         var topicId = TopicId.Of(id);
         var topic = await _dbContext.Topics
-            .FindAsync([topicId], cancellationToken);
+            .Include(x => x.Users)
+            .ThenInclude(x => x.CurrentUser)
+            .FirstOrDefaultAsync(x=>x.Id == topicId, cancellationToken);
 
         if (topic is null || topic.IsDeleted)
             throw new TopicNotFoundException(id);

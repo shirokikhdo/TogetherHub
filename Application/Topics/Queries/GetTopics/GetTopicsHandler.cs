@@ -29,6 +29,8 @@ public class GetTopicsHandler : IQueryHandler<GetTopicsQuery, GetTopicsResult>
     {
         var topics = await _dbContext.Topics
             .AsNoTracking()
+            .Include(x=>x.Users)
+            .ThenInclude(x=>x.CurrentUser)
             .Where(x=>!x.IsDeleted)
             .ToListAsync(cancellationToken);
 

@@ -47,9 +47,9 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Id,
                 options => options.MapFrom(src => src.Id))
             .ForMember(dest => dest.UserName,
-                options => options.MapFrom(src => src.Username));
-            //.ForMember(dest => dest.FullName,
-            //    options => options.MapFrom(src => src.FullName));
+                options => options.MapFrom(src => src.Username))
+            .ForMember(dest => dest.FullName,
+                options => options.MapFrom(src => src.FullName));
 
         CreateMap<RelationshipDto, Relationship>()
             .ForMember(dest => dest.TopicReference,

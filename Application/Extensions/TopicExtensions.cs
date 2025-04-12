@@ -21,7 +21,7 @@ public static class TopicExtensions
             topic.Users.Select(x=>new UserProfileDto(
                 x.CurrentUser.Id,
                 x.CurrentUser.UserName!,
-                x.CurrentUser.FullName,
+                x.CurrentUser.FullName!,
                 x.Role.ToString()))
                 .ToList());
 
